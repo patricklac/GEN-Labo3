@@ -48,12 +48,14 @@ public class Compte {
      * @return si le débit est possible ou non
      */
     public boolean debit(int valeur) {
+        synchronized (this) {
             if (montant - valeur >= 0) {
                 this.montant -= valeur;
                 return true;
             } else {
                 return false;
             }
+        }
     }
 
     /**
@@ -61,6 +63,8 @@ public class Compte {
      * @param valeur montant du crédit
      */
     public void credit(int valeur) {
+        synchronized (this) {
             this.montant += valeur;
+        }
     }
 }
