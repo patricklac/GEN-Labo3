@@ -24,7 +24,10 @@ public class LecteursRedacteursTest {
     private Redacteur redacteur1;
     private Redacteur redacteur2;
 
-
+    /**
+     * Méthode exécutée avant toute exécution de tests pour préparer les données
+     * @throws Exception exception
+     */
     @BeforeEach
     public void setUp() throws Exception {
         controleur = new Controleur();
@@ -35,6 +38,10 @@ public class LecteursRedacteursTest {
         redacteur2 = new Redacteur(controleur);
     }
 
+    /**
+     * Méthode de tests des classes lecteurs et redacteurs avec accès parallèle aux documents
+     * @throws InterruptedException
+     */
     @Test
     public void lecteursRedacteurs() throws InterruptedException {
         lecteur1.startRead();
@@ -66,5 +73,4 @@ public class LecteursRedacteursTest {
         assertFalse(lecteur3.isWaiting());
         lecteur3.stopRead();
     }
-
 }
