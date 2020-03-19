@@ -10,15 +10,16 @@ Compilateur : javac 11.0.4
 --------------------------- */
 package ch.heigvd.aalamo.lecteursredacteurs;
 
-public class Lecteur implements Runnable{
+public class Lecteur implements Runnable {
     private Controleur controleur;
 
     /**
      * Instanciation d'un lecteur
+     *
      * @param controleur de gestion des accès
      */
     public Lecteur(Controleur controleur) {
-        if(controleur == null)
+        if (controleur == null)
             throw new RuntimeException("Contrôleur nul");
         this.controleur = controleur;
     }
@@ -26,20 +27,30 @@ public class Lecteur implements Runnable{
     /**
      * Débuter la lecture d'un document
      */
-    public void startRead() {
+    public void startRead() throws InterruptedException {
+        synchronized (this){
+            new Thread(this).start();
+            Thread.sleep(1); // Nécessaire pour éviter que isWaiting soit appelé avant le run du thread
+        }
     }
 
     /**
      * Savoir si le lecteur est en file d'attente pour lire le document
+     *
      * @return si le lecteur est en file d'attente pour lire le document
      */
     public boolean isWaiting() {
+        return controleur.isWaiting(this);
     }
 
     /**
      * Arrêter la lecture d'un document
      */
-    public void stopRead() {
+    public void stopRead() throws InterruptedException {
+        synchronized (this) {
+            controleur.stopRead(this);
+            Thread.sleep(1); // Nécessaire pour éviter que isWaiting soit appelé avant le run du thread
+        }
     }
 
     /**
@@ -47,6 +58,6 @@ public class Lecteur implements Runnable{
      */
     @Override
     public void run() {
-
+        controleur.readDocument(this);
     }
 }
