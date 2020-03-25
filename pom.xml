@@ -16,6 +16,6 @@
 
     <modules>
         <module>banque</module>
-        <!-- <module>lecteursredacteurs</module> -->
+        <module>lecteursredacteurs</module>
     </modules>
 </project>
