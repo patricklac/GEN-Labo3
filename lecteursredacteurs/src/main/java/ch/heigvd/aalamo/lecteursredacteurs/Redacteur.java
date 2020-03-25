@@ -25,7 +25,7 @@ public class Redacteur implements Runnable {
     }
 
     /**
-     * Débuter d'écrir un document
+     * Débuter d'écrire un document
      */
     public void startWrite() throws InterruptedException {
         synchronized (this) {
