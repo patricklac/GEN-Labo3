@@ -38,7 +38,7 @@ public class TransfertsTest {
      */
     @Test
     public void threadTest() throws InterruptedException {
-        // Création de la liste de transferts
+        // Création de la liste de transfertss
         List<Transferts> transferts = new ArrayList<>();
 
         // Ajout des 1000 transferts et démarrage de leurs threads
